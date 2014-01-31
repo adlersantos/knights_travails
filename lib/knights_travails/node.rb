@@ -37,4 +37,19 @@ class Node
       next_node.dfs(value, stack, visited_nodes)
     end
   end
+
+  def bfs(value, queue=[], visited_nodes=[self])
+    return self if @value == value
+
+    next_node = @children.detect { |node| !visited_nodes.include?(node) }
+
+    if next_node
+      return next_node if @value == next_node.value
+      [queue, visited_nodes].each { |arr| arr << next_node }
+      self.bfs(value, queue, visited_nodes)
+    else
+      return nil if queue.size == 1
+      queue.shift.bfs(value, queue, visited_nodes)
+    end
+  end
 end
