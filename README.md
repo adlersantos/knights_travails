@@ -1,6 +1,6 @@
 # Knights Travails
 
-Shows the least number of moves needed for a chess knight to move from one position to another in a chessboard
+Shows the least number of moves needed for a chess knight to move from one position to another.
 
 ## Installation and Usage
 
@@ -11,12 +11,12 @@ $ cd knights_travails
 
 Now run your favorite Ruby interpreter and do the following:
 ```
-> load './lib/knights_travails.rb
+> load './lib/knights_travails.rb'
 > KnightsTravails.find_path([6, 7], [7, 1])
 => [[6, 7], [7, 5], [6, 3], [7, 1]]
 ```
 
-The chessboard is represented as a 8 x 8 grid with x- and y-values ranging from 0 to 7. The method `KnightsTravails.find_path(start, end)` will give you the shortest path a knight can take from a start to end.
+The chessboard is represented as a 8 x 8 grid with x- and y-values ranging from 0 to 7. The method `KnightsTravails.find_path(start, end)` will give you the shortest path a knight can take from start to end.
 
 ## Contributing
 
