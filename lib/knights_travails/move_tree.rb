@@ -1,12 +1,12 @@
 module KnightsTravails
   class MoveTree
-    attr_accessor :visited_nodes
+    attr_accessor :nodes
 
     def initialize(root_position)
       @root = Move.new(root_position)
-      @visited_nodes = [@root]
+      @nodes = [@root]
 
-      build_and_filter_next_moves(@root)
+      setup_new_vertex(@root)
       build_tree_from(@root)
     end
 
@@ -16,23 +16,23 @@ module KnightsTravails
       next_move = root.children.detect { |child| !visited_positions.include?(child.value) }
 
       if next_move
-        [queue, @visited_nodes].each { |arr| arr << next_move }
+        [queue, @nodes].each { |arr| arr << next_move }
         build_tree_from(root, queue)
       else
         return if queue.empty?
         next_root = queue.shift
-        build_and_filter_next_moves(next_root)
+        setup_new_vertex(next_root)
         build_tree_from(next_root, queue)
       end
     end
 
-    def build_and_filter_next_moves(node)
+    def setup_new_vertex(node)
       node.build_next_moves
       node.children.select! { |child| !visited_positions.include?(child.value) }
     end
 
     def visited_positions
-      @visited_nodes.map { |node| node.value }
+      @nodes.map { |node| node.value }
     end
   end
 end
