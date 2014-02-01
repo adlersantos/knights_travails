@@ -6,7 +6,7 @@ module KnightsTravails
       @root = Move.new(root_position)
       @visited_nodes = [@root]
 
-      @root.generate_next_moves
+      build_and_filter_next_moves(@root)
       build_tree_from(@root)
     end
 
@@ -16,16 +16,19 @@ module KnightsTravails
       next_move = root.children.detect { |child| !visited_positions.include?(child.value) }
 
       if next_move
-        queue << next_move
-        @visited_nodes << next_move
+        [queue, @visited_nodes].each { |arr| arr << next_move }
         build_tree_from(root, queue)
       else
         return if queue.empty?
         next_root = queue.shift
-        next_root.generate_next_moves
-        next_root.children.select! { |child| !visited_positions.include?(child.value) }
+        build_and_filter_next_moves(next_root)
         build_tree_from(next_root, queue)
       end
+    end
+
+    def build_and_filter_next_moves(node)
+      node.build_next_moves
+      node.children.select! { |child| !visited_positions.include?(child.value) }
     end
 
     def visited_positions

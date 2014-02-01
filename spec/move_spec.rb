@@ -3,7 +3,7 @@ require 'spec_helper'
 describe KnightsTravails::Move do
   before :each do
     @move = KnightsTravails::Move.new([0, 0])
-    @move.generate_next_moves
+    @move.build_next_moves
     @children_values = @move.children.map { |child| child.value }
   end
 
