@@ -15,7 +15,7 @@ module KnightsTravails
     def generate_next_moves
       moves = MOVES.collect { |move| [x_value + move[0], y_value + move[1]] }
       valid_moves = moves.select { |move| validate_position(move) }
-      @children = valid_moves.map { |move| Move.new(move) }
+      @children = valid_moves.map { |move| Move.new(move, parent: self) }
     end
 
     def children_values

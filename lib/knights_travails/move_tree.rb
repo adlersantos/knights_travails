@@ -10,6 +10,8 @@ module KnightsTravails
       build_tree_from(@root)
     end
 
+    private
+
     def build_tree_from(root, queue=[])
       next_move = root.children.detect { |child| !visited_positions.include?(child.value) }
 
@@ -25,8 +27,6 @@ module KnightsTravails
         build_tree_from(next_root, queue)
       end
     end
-
-    private
 
     def visited_positions
       @visited_nodes.map { |node| node.value }
